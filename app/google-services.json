@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "378017639437",
+    "firebase_url": "https://disease-48e46.firebaseio.com",
+    "project_id": "disease-48e46",
+    "storage_bucket": "disease-48e46.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378017639437:android:fa3715270b37f18ab03944",
+        "android_client_info": {
+          "package_name": "com.kotsur.doctorshandbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378017639437-471legovet37jbqmmoicvhu54h4iof2k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kotsur.doctorshandbook",
+            "certificate_hash": "9ca7f1c50f1af28c51e9c19b99449953eef89b21"
+          }
+        },
+        {
+          "client_id": "378017639437-dmbbjt1nev4i63ic1318q26mpa8b6a7f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAy01EKSxcif7GCgLB0Y-x24ASwMMc8Bps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378017639437-dmbbjt1nev4i63ic1318q26mpa8b6a7f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
