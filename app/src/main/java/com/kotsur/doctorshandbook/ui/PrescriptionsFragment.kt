@@ -1,4 +1,4 @@
-package com.kotsur.doctorshandbook
+package com.kotsur.doctorshandbook.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.google.firebase.firestore.FirebaseFirestore
+import androidx.navigation.fragment.findNavController
+import com.kotsur.doctorshandbook.Data
+import com.kotsur.doctorshandbook.Prescription
+import com.kotsur.doctorshandbook.R
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class PrescriptionsFragment : Fragment() {
@@ -24,11 +27,7 @@ class PrescriptionsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         add_prescription.setOnClickListener {
-
-            val newPrescription = Prescription(patient = "New", disease = Data.diseases["measles"]!!, medicine = emptyList())
-            Data.prescriptions.add(newPrescription)
-
-            showPrescriptions()
+            findNavController().navigate(R.id.add_prescription_fragment)
         }
 
         showPrescriptions()

@@ -7,19 +7,24 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.kotsur.doctorshandbook.PrescriptionsFragment"
-        android:label="@string/title_home"
+        android:name="com.kotsur.doctorshandbook.ui.PrescriptionsFragment"
+        android:label="Prescriptions"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.kotsur.doctorshandbook.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:name="com.kotsur.doctorshandbook.ui.DashboardFragment"
+        android:label="Medicine"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.kotsur.doctorshandbook.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:name="com.kotsur.doctorshandbook.ui.NotificationsFragment"
+        android:label="Diseases"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/add_prescription_fragment"
+        android:name="com.kotsur.doctorshandbook.ui.AddPrescriptionFragment"
+        tools:layout="@layout/fragment_add_prescription" />
 </navigation>
