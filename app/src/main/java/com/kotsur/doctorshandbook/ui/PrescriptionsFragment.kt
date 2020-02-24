@@ -6,11 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.kotsur.doctorshandbook.Data
-import com.kotsur.doctorshandbook.Prescription
 import com.kotsur.doctorshandbook.R
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.prescription_item.view.*
 
 class PrescriptionsFragment : Fragment() {
 
@@ -27,7 +26,12 @@ class PrescriptionsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         add_prescription.setOnClickListener {
-            findNavController().navigate(R.id.add_prescription_fragment)
+            val addPrescriptionFragment = AddPrescriptionFragment()
+            addPrescriptionFragment.onCompletedListener = {
+                showPrescriptions()
+            }
+            addPrescriptionFragment.show(childFragmentManager, "AddPrescriptionFragment")
+//            findNavController().navigate(R.id.add_prescription_fragment)
         }
 
         showPrescriptions()
@@ -35,11 +39,22 @@ class PrescriptionsFragment : Fragment() {
 
     private fun showPrescriptions() {
         prescrption_list.removeAllViews()
+
         val prescriptions = Data.prescriptions
         for (prescription in prescriptions) {
-            val prescriptionView = TextView(requireContext())
-            prescriptionView.text =
-                "Patient: ${prescription.patient}, Disease: ${prescription.disease.name}"
+            val prescriptionView = layoutInflater.inflate(R.layout.prescription_item, null, false)
+            prescriptionView.patient_name.text = prescription.patient
+            prescriptionView.disease_button.text = prescription.disease.name
+
+            prescriptionView.medicine_list.removeAllViews()
+            for (prescriptionMedicine in prescription.medicine){
+                val prescriptionMedicineView = TextView(requireContext())
+                prescriptionMedicineView.text = "Medicine: ${prescriptionMedicine.medicine.name}, count: ${prescriptionMedicine.count} \n" +
+                        "Prescription: ${prescriptionMedicine.prescription}"
+                prescriptionMedicineView.setPadding(10, 10, 10, 10)
+                prescriptionView.medicine_list.addView(prescriptionMedicineView)
+            }
+
             prescrption_list.addView(prescriptionView)
         }
     }
