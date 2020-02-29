@@ -3,25 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_prescription">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_prescription"
         android:name="com.kotsur.doctorshandbook.ui.PrescriptionsFragment"
         android:label="Prescriptions"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_prescriptions" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.kotsur.doctorshandbook.ui.DashboardFragment"
-        android:label="Medicine"
-        tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.kotsur.doctorshandbook.ui.NotificationsFragment"
+        android:id="@+id/navigation_diseases"
+        android:name="com.kotsur.doctorshandbook.ui.DiseasesFragment"
         android:label="Diseases"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_diseases" />
+
+    <fragment
+        android:id="@+id/navigation_medicines"
+        android:name="com.kotsur.doctorshandbook.ui.MedicinesFragment"
+        android:label="Medicines"
+        tools:layout="@layout/fragment_medicines" />
+
+    <fragment
+        android:id="@+id/navigation_warehouse"
+        android:name="com.kotsur.doctorshandbook.ui.WarehouseFragment"
+        android:label="Warehouse"
+        tools:layout="@layout/fragment_warehouse" />
 
     <fragment
         android:id="@+id/add_prescription_fragment"

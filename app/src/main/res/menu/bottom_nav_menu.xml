@@ -2,18 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_prescription"
         android:icon="@drawable/ic_home_black_24dp"
         android:title="Prescriptions" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_diseases"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="Diseases" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_medicines"
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="Medicine" />
+
+    <item
+        android:id="@+id/navigation_warehouse"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="Warehouse" />
 
 </menu>

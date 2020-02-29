@@ -9,12 +9,11 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.kotsur.doctorshandbook.*
 import kotlinx.android.synthetic.main.fragment_add_prescription.*
-import kotlinx.android.synthetic.main.prescription_medicine_item.view.*
 
 class AddPrescriptionFragment : DialogFragment() {
 
     private var selectedDisease: Disease? = null
-    private val selectedPrescriptionMedicine: MutableSet<PrescriptionMedicine> = mutableSetOf()
+    private val selectedPrescriptionMedicineList: MutableSet<PrescriptionMedicine> = mutableSetOf()
 
     var onCompletedListener: () -> Unit = { }
 
@@ -45,16 +44,40 @@ class AddPrescriptionFragment : DialogFragment() {
             AlertDialog.Builder(requireContext())
                 .setTitle("Select medicine for ${disease.name}")
                 .setItems(itemsForSelection) { dialog, selectedIndex ->
-                    val prescriptionMedicine = disease.medicine[selectedIndex]
-                    selectedPrescriptionMedicine.add(prescriptionMedicine)
+
+                    val selectedPrescriptionMedicine: PrescriptionMedicine =
+                        disease.medicine[selectedIndex]
+                    val selectedMedicineCount: Int = selectedPrescriptionMedicine.count
+
+                    val medicineBalance: Int =
+                        Data.warehouse[selectedPrescriptionMedicine.medicine] ?: 0
+
+                    if (selectedMedicineCount > medicineBalance) {
+
+                        AlertDialog.Builder(requireContext())
+                            .setTitle("Attention")
+                            .setMessage(
+                                "For selected medicine: ${selectedPrescriptionMedicine.medicine.name} and count: $selectedMedicineCount there is not enough balance on the warehouse!" +
+                                        "Warehouse balance is $medicineBalance.\n Please select another medicine or count!"
+                            )
+                            .setPositiveButton("OK") { dialog, which ->
+
+                            }
+                            .show()
+
+                        return@setItems
+                    }
+
+                    selectedPrescriptionMedicineList.add(selectedPrescriptionMedicine)
                     showSelectedMedicine()
+
                     dialog.dismiss()
                 }.show()
 
         }
 
         clear_medicine.setOnClickListener {
-            selectedPrescriptionMedicine.clear()
+            selectedPrescriptionMedicineList.clear()
             medicine_list.removeAllViews()
         }
 
@@ -62,8 +85,8 @@ class AddPrescriptionFragment : DialogFragment() {
 
             val diseases: MutableList<Disease> = mutableListOf()
 
-            for (entry: Map.Entry<String, Disease> in Data.diseases) {
-                diseases.add(entry.value)
+            for (entry: Disease in Data.diseases) {
+                diseases.add(entry)
             }
 
             val itemsForSelection = Array<CharSequence>(diseases.size) { index ->
@@ -93,7 +116,7 @@ class AddPrescriptionFragment : DialogFragment() {
             }
 
             val selectedDisease = this.selectedDisease
-            if (selectedDisease == null || selectedPrescriptionMedicine.isEmpty()) {
+            if (selectedDisease == null || selectedPrescriptionMedicineList.isEmpty()) {
                 Toast.makeText(
                     requireContext(),
                     "Please, select the disease and medicine!",
@@ -105,7 +128,7 @@ class AddPrescriptionFragment : DialogFragment() {
             val newPrescription = Prescription(
                 patient = patientName,
                 disease = selectedDisease,
-                medicine = selectedPrescriptionMedicine.toList()
+                medicine = selectedPrescriptionMedicineList.toList()
             )
 
             Data.prescriptions.add(newPrescription)
@@ -118,13 +141,13 @@ class AddPrescriptionFragment : DialogFragment() {
     private fun showSelectedMedicine() {
         medicine_list.removeAllViews()
 
-        for (prescriptionMedicine in selectedPrescriptionMedicine) {
+        for (prescriptionMedicine in selectedPrescriptionMedicineList) {
             val selectedMedicineView =
-                layoutInflater.inflate(R.layout.prescription_medicine_item, null)
-            selectedMedicineView.medicine.text =
-                "${prescriptionMedicine.medicine.name} count: ${prescriptionMedicine.count}"
-            selectedMedicineView.prescription.text = prescriptionMedicine.prescription
+                createPrescriptionMedicineView(layoutInflater, prescriptionMedicine)
             medicine_list.addView(selectedMedicineView)
         }
     }
+
 }
+
+

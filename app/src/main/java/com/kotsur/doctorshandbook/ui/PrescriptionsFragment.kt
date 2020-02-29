@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.kotsur.doctorshandbook.Data
 import com.kotsur.doctorshandbook.R
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_prescriptions.*
 import kotlinx.android.synthetic.main.prescription_item.view.*
 
 class PrescriptionsFragment : Fragment() {
@@ -18,8 +18,7 @@ class PrescriptionsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        return root
+        return  inflater.inflate(R.layout.fragment_prescriptions, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,7 +30,6 @@ class PrescriptionsFragment : Fragment() {
                 showPrescriptions()
             }
             addPrescriptionFragment.show(childFragmentManager, "AddPrescriptionFragment")
-//            findNavController().navigate(R.id.add_prescription_fragment)
         }
 
         showPrescriptions()
