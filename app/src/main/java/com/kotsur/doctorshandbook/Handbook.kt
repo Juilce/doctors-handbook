@@ -22,7 +22,7 @@ data class Warehouse(
 )
 
 /**
- * PrescriptionMedicine -
+ * PrescriptionMedicine - add icons
  */
 data class PrescriptionMedicine(
     val medicine: Medicine,
